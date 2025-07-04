@@ -6,3 +6,4 @@ obj/
 *.log
 *.vsix
 *.nupkg
+appsettings.json
