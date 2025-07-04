@@ -44,6 +44,8 @@
             <tr>
               <th class="px-5 py-3 text-blue-400 font-semibold uppercase tracking-wide select-none">No</th>
 
+                <th class="px-5 py-3 text-blue-400 font-semibold uppercase tracking-wide select-none">Title</th>
+
               <th
                 class="cursor-pointer px-5 py-3 text-blue-400 font-semibold uppercase tracking-wide select-none"
                 @click="sortBy('createdAt')"
@@ -65,6 +67,9 @@
             >
               <td class="px-5 py-3 whitespace-nowrap font-medium text-gray-200 text-center">
                 {{ (currentPage - 1) * pageSize + index + 1 }}
+              </td>
+              <td class="px-5 py-3 whitespace-nowrap font-medium text-gray-200">
+                {{ note.title || "Untitled Note" }}
               </td>
               <td class="px-5 py-3 whitespace-nowrap text-gray-400 font-mono text-sm">
                 {{ formatDate(note.createdAt) }}
@@ -253,6 +258,7 @@ import axios from "axios";
 import alertify from "alertifyjs";
 import SortIcon from "./SortIcon.vue";
 import { API_BASE_URL } from "../../api";
+import { getToken, getUserId } from "../../utils/auth";
 
 // Detail modal state
 const detailVisible = ref(false);
@@ -288,9 +294,9 @@ const modalNote = ref({ id: 0, title: "", content: "" });
 // Load user info and notes on mount
 onMounted(async () => {
   username.value = localStorage.getItem("username") || "";
-  userId.value = localStorage.getItem("userId") || "";
+  userId.value = getUserId() || "";
 
-  if (!userId.value || !localStorage.getItem("token")) {
+  if (!userId.value || !getToken()) {
     alertify.error("Session expired. Please log in.");
     window.location.href = "/login";
     return;
@@ -301,8 +307,8 @@ onMounted(async () => {
 
 async function loadNotes() {
   try {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId"); 
+    const token = getToken();
+    const userId = getUserId();
 
     if (!token || !userId) {
       alertify.error("Please log in first.");
@@ -327,14 +333,34 @@ async function loadNotes() {
 
 // Filtered notes based on search
 const filteredNotes = computed(() => {
-  if (!searchQuery.value) return notes.value;
-  const q = searchQuery.value.toLowerCase();
-  return notes.value.filter(
-    (note) =>
-      note.title.toLowerCase().includes(q) ||
-      (note.content && note.content.toLowerCase().includes(q))
-  );
+  let result = notes.value.slice(); // Make a copy so we don't mutate original
+
+  // Search filtering
+  if (searchQuery.value) {
+    const q = searchQuery.value.toLowerCase();
+    result = result.filter(
+      (note) =>
+        note.title.toLowerCase().includes(q) ||
+        (note.content && note.content.toLowerCase().includes(q))
+    );
+  }
+
+  // Sorting
+  result.sort((a: any, b: any) => {
+    let valA = a[sortField.value];
+    let valB = b[sortField.value];
+
+    if (typeof valA === "string") valA = valA.toLowerCase();
+    if (typeof valB === "string") valB = valB.toLowerCase();
+
+    if (valA < valB) return sortAsc.value ? -1 : 1;
+    if (valA > valB) return sortAsc.value ? 1 : -1;
+    return 0;
+  });
+
+  return result;
 });
+
 
 // Pagination
 const totalPages = computed(() =>
@@ -394,8 +420,8 @@ function closeModal() {
 
 // Add or update note
 async function submitNote() {
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId"); 
+  const token = getToken();
+  const userId = getUserId();
   if (!token || !userId) {
     alertify.error("Please log in first.");
     logout();
@@ -438,8 +464,8 @@ async function submitNote() {
 
 // Delete note
 async function deleteNote(id: number) {
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId"); 
+  const token = getToken();
+  const userId = getUserId();
 
   if (!token || !userId) {
     alertify.error("Please log in first.");

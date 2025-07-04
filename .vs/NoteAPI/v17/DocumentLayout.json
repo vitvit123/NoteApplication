@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|d:\\noteapi\\noteapi\\noteapi\\noteapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|solutionrelative:noteapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|d:\\noteapi\\noteapi\\noteapi\\noteapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|solutionrelative:noteapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -17,6 +13,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|d:\\noteapi\\noteapi\\noteapi\\noteapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|solutionrelative:noteapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|d:\\noteapi\\noteapi\\noteapi\\noteapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|solutionrelative:noteapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5FDCA688-FACD-4D53-8DD1-5A4A1478F1F3}|NoteAPI\\NoteAPI.csproj|d:\\noteapi\\noteapi\\noteapi\\noteapi\\noteapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
@@ -62,83 +62,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 7,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Program.cs",
-              "RelativeDocumentMoniker": "NoteAPI\\Program.cs",
-              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Program.cs",
-              "RelativeToolTip": "NoteAPI\\Program.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAiwCgAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T04:33:27.144Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "NoteRepository.cs",
-              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Repositories\\NoteRepository.cs",
-              "RelativeDocumentMoniker": "NoteAPI\\Repositories\\NoteRepository.cs",
-              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Repositories\\NoteRepository.cs",
-              "RelativeToolTip": "NoteAPI\\Repositories\\NoteRepository.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T04:33:00.499Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Note.cs.cs",
-              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Models\\Note.cs.cs",
-              "RelativeDocumentMoniker": "NoteAPI\\Models\\Note.cs.cs",
-              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Models\\Note.cs.cs",
-              "RelativeToolTip": "NoteAPI\\Models\\Note.cs.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T04:31:50.972Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "NoteAPI\\appsettings.json",
-              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\appsettings.json",
-              "RelativeToolTip": "NoteAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-03T04:26:27.708Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "NoteAPI\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "NoteAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAJsAAAAAAAAAAAAUwK0AAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T04:54:46.899Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "JwtSettings.cs",
-              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Models\\JwtSettings.cs",
-              "RelativeDocumentMoniker": "NoteAPI\\Models\\JwtSettings.cs",
-              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Models\\JwtSettings.cs",
-              "RelativeToolTip": "NoteAPI\\Models\\JwtSettings.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T13:51:03.749Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 12,
@@ -189,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": ".gitignore",
               "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\.gitignore",
               "RelativeDocumentMoniker": "NoteAPI\\.gitignore",
@@ -203,6 +128,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Program.cs",
+              "RelativeDocumentMoniker": "NoteAPI\\Program.cs",
+              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Program.cs",
+              "RelativeToolTip": "NoteAPI\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T04:33:27.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "WeatherForecast.cs",
               "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "NoteAPI\\WeatherForecast.cs",
@@ -215,6 +153,67 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "NoteAPI\\appsettings.json",
+              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\appsettings.json",
+              "RelativeToolTip": "NoteAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-03T04:26:27.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "JwtSettings.cs",
+              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Models\\JwtSettings.cs",
+              "RelativeDocumentMoniker": "NoteAPI\\Models\\JwtSettings.cs",
+              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Models\\JwtSettings.cs",
+              "RelativeToolTip": "NoteAPI\\Models\\JwtSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T13:51:03.749Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "NoteAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "NoteAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAUwK0AAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T04:54:46.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Note.cs.cs",
+              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Models\\Note.cs.cs",
+              "RelativeDocumentMoniker": "NoteAPI\\Models\\Note.cs.cs",
+              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Models\\Note.cs.cs",
+              "RelativeToolTip": "NoteAPI\\Models\\Note.cs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T04:31:50.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NoteRepository.cs",
+              "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Repositories\\NoteRepository.cs",
+              "RelativeDocumentMoniker": "NoteAPI\\Repositories\\NoteRepository.cs",
+              "ToolTip": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\Repositories\\NoteRepository.cs",
+              "RelativeToolTip": "NoteAPI\\Repositories\\NoteRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T04:33:00.499Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
               "Title": "NoteAPI.http",
               "DocumentMoniker": "D:\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI\\NoteAPI.http",
@@ -223,8 +222,7 @@
               "RelativeToolTip": "NoteAPI\\NoteAPI.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-07-04T02:20:57.22Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-04T02:20:57.22Z"
             }
           ]
         }

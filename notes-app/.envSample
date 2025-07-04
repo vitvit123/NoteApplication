@@ -1,0 +1,11 @@
+# =========================
+# Vue Frontend Environment Variables Sample
+# =========================
+
+# Base URL of your backend API server
+# Change this to your backend server address (e.g., local dev or production)
+VITE_API_BASE_URL="http://localhost:5246"
+
+# Add any other Vue env vars here, e.g.
+# VITE_SOME_FEATURE_FLAG=true
+# VITE_API_TIMEOUT=5000
