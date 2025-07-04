@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using NoteAppApi.Repositories;
-using NoteAppApi.Security; // For TokenBlacklist
+using NoteAppApi.Security;
+using StackExchange.Redis;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
-using Microsoft.OpenApi.Models;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add CORS policy
+// CORS config (keep as-is)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -19,7 +23,17 @@ builder.Services.AddCors(options =>
     });
 });
 
-// === Add JWT Authentication here ===
+// Redis config (keep as-is)
+var redisConfig = builder.Configuration.GetSection("Redis");
+string redisConnectionString = redisConfig.GetValue<string>("ConnectionString");
+builder.Services.AddSingleton<IConnectionMultiplexer>(
+    ConnectionMultiplexer.Connect(builder.Configuration["Redis:ConnectionString"])
+);
+
+
+// JWT Authentication config
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -32,57 +46,65 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
-        ClockSkew = TimeSpan.FromMinutes(5),
         ValidateIssuerSigningKey = true,
+        ClockSkew = TimeSpan.FromMinutes(5),
+
         ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
         ValidAudience = builder.Configuration["JwtSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"])
+        ),
+
+        // 👇 These two lines are critical for mapping user claims
+        NameClaimType = ClaimTypes.Name,
+        RoleClaimType = ClaimTypes.Role
     };
+
 
     options.Events = new JwtBearerEvents
     {
         OnTokenValidated = context =>
         {
-            var jti = context.Principal.FindFirst(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti)?.Value;
+            var jti = context.Principal.FindFirst(JwtRegisteredClaimNames.Jti)?.Value;
             if (jti != null && TokenBlacklist.IsBlacklisted(jti))
             {
                 context.Fail("This token has been revoked.");
             }
             return Task.CompletedTask;
         },
-
         OnAuthenticationFailed = context =>
         {
-            Console.WriteLine($"JWT Validation failed: {context.Exception.Message}");
+            Console.WriteLine($"JWT Authentication failed: {context.Exception.Message}");
             return Task.CompletedTask;
         }
     };
 });
 
-// Register other services
+
+// Register services (keep as-is)
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoteAppApi", Version = "v1" });
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "NoteAppApi", Version = "v1" });
 
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Description = "Enter JWT Bearer token **only**, without 'Bearer ' prefix",
         Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
         Scheme = "Bearer"
     });
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
     {
         {
-            new OpenApiSecurityScheme
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference { Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme, Id = "Bearer" }
             },
-            new string[] {}
+            new string[] { }
         }
     });
 });
@@ -102,7 +124,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowFrontend");
 
-// IMPORTANT: Middleware order matters!
+// Middleware order is critical:
 app.UseAuthentication();
 app.UseAuthorization();
 

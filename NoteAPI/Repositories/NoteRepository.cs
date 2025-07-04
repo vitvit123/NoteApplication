@@ -20,20 +20,9 @@ namespace NoteAppApi.Repositories
 
         public async Task<List<Note>> GetNotesByUserId(int userId)
         {
-            var sql = "SELECT * FROM Notes WHERE UserId = @userId";
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                return (await connection.QueryAsync<Note>(sql, new { userId })).ToList();
-            }
-        }
-
-
-        public async Task<Note?> GetNoteById(int noteId, int userId)
-        {
-            using var conn = GetConnection();
-            return await conn.QueryFirstOrDefaultAsync<Note>(
-                "SELECT * FROM Notes WHERE Id = @Id AND UserId = @UserId",
-                new { Id = noteId, UserId = userId });
+            var sql = "SELECT * FROM Notes WHERE UserId = @UserId AND deleted_at IS NULL ORDER BY CreatedAt DESC";
+            using var conn = new SqlConnection(_connectionString);
+            return (await conn.QueryAsync<Note>(sql, new { UserId = userId })).ToList();
         }
 
         public async Task<int> CreateNote(Note note)
@@ -64,9 +53,16 @@ namespace NoteAppApi.Repositories
         public async Task<bool> DeleteNote(int id, int userId)
         {
             using var conn = GetConnection();
-            var sql = "DELETE FROM Notes WHERE Id = @Id AND UserId = @UserId";
+            var sql = @"
+        UPDATE Notes
+        SET deleted_at = GETDATE(),  
+            delby = @UserId     
+        WHERE Id = @Id AND UserId = @UserId AND deleted_at IS NULL";
+
             var rows = await conn.ExecuteAsync(sql, new { Id = id, UserId = userId });
             return rows > 0;
         }
+
+
     }
 }

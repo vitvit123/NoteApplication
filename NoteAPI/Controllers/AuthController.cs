@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using NoteAppApi.Models;
 using NoteAppApi.Repositories;
 using NoteAppApi.Security;
+using StackExchange.Redis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -18,6 +19,8 @@ namespace NoteAppApi.Controllers
     {
         private readonly UserRepository _userRepo;
         private readonly IConfiguration _config;
+        private readonly IDatabase _redis;
+
 
         private bool IsStrongPassword(string password, out string error)
         {
@@ -41,14 +44,13 @@ namespace NoteAppApi.Controllers
             return true;
         }
 
-
-
-
-        public AuthController(UserRepository userRepo, IConfiguration config)
+        public AuthController(UserRepository userRepo, IConfiguration config, IConnectionMultiplexer redis)
         {
             _userRepo = userRepo;
             _config = config;
+            _redis = redis.GetDatabase(); 
         }
+
         private List<string> ValidateUserRegistration(UserRegisterDto dto)
         {
             var errors = new List<string>();
@@ -98,7 +100,6 @@ namespace NoteAppApi.Controllers
 
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
-    
             var user = new User
             {
                 Username = dto.Username,
@@ -107,8 +108,21 @@ namespace NoteAppApi.Controllers
 
             user.Id = await _userRepo.CreateUser(user);
 
-            return Ok(new { message = "User registered successfully." });
+            // ✅ Auto-login: Generate JWT token
+            var token = GenerateJwtToken(user);
+
+            // ✅ Store token in Redis for session
+            await _redis.StringSetAsync($"auth:{user.Id}", token, TimeSpan.FromHours(1));
+
+            return Ok(new
+            {
+                message = "User registered and logged in successfully.",
+                token,
+                userId = user.Id,
+                username = user.Username
+            });
         }
+
 
 
 
@@ -144,8 +158,8 @@ namespace NoteAppApi.Controllers
             user.FailedLoginAttempts = 0;
             user.LockoutEnd = null;
             await _userRepo.UpdateUser(user);
-
             var token = GenerateJwtToken(user);
+            await _redis.StringSetAsync($"auth:{user.Id}", token, TimeSpan.FromHours(1));
             return Ok(new { token ,
                                 userId = user.Id,
                                 username = user.Username

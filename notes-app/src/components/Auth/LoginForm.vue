@@ -1,17 +1,17 @@
 <template>
   <div
-    class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 px-4"
+    class="min-h-screen flex items-center justify-center bg-gray-900 px-4"
   >
     <form
       @submit.prevent="onSubmit"
-      class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md border border-gray-200"
+      class="bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-700"
     >
-      <h2 class="text-3xl font-bold mb-6 text-center text-blue-700">
+      <h2 class="text-3xl font-bold mb-6 text-center text-gray-100">
         Note Application
       </h2>
 
       <div class="mb-5">
-        <label for="username" class="block text-gray-700 mb-1 font-medium">
+        <label for="username" class="block text-gray-300 mb-1 font-medium">
           Username
         </label>
         <input
@@ -19,13 +19,13 @@
           v-model="username"
           type="text"
           placeholder="Enter your username"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition"
+          class="w-full px-4 py-2 bg-gray-900 text-gray-100 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           required
         />
       </div>
 
       <div class="mb-6 relative">
-        <label for="password" class="block text-gray-700 mb-1 font-medium">
+        <label for="password" class="block text-gray-300 mb-1 font-medium">
           Password
         </label>
         <input
@@ -33,13 +33,13 @@
           id="password"
           v-model="password"
           placeholder="Enter your password"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition pr-10"
+          class="w-full px-4 py-2 bg-gray-900 text-gray-100 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition pr-10"
           required
         />
         <button
           type="button"
           @click="toggleShowPassword"
-          class="absolute right-3 top-9 text-gray-500 hover:text-blue-600 focus:outline-none"
+          class="absolute right-3 top-9 text-gray-400 hover:text-blue-400 focus:outline-none"
           tabindex="-1"
           aria-label="Toggle password visibility"
         >
@@ -118,11 +118,11 @@
         {{ loading ? "Logging in..." : "Login" }}
       </button>
 
-      <p class="mt-6 text-center text-sm text-gray-600">
+      <p class="mt-6 text-center text-sm text-gray-400">
         Don't have an account?
         <router-link
           to="/register"
-          class="text-blue-600 hover:underline font-medium"
+          class="text-blue-500 hover:underline font-medium"
         >
           Register here
         </router-link>
@@ -130,6 +130,7 @@
     </form>
   </div>
 </template>
+
 
 <script lang="ts" setup>
 import { ref } from "vue";
@@ -166,7 +167,6 @@ async function onSubmit() {
 
     if (response.status === 200 && response.data.token) {
         alertify.success(`Logged in as ${response.data.username}`);
-        alertify.success('token', response.data.token);
 
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('username', response.data.username);
