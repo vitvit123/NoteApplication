@@ -138,6 +138,8 @@ import axios from "axios";
 import alertify from "alertifyjs";
 import "alertifyjs/build/css/alertify.css";
 import router from "../../router";
+import { API_BASE_URL } from "../../api";
+
 
 // Position alertify notifications top-right
 alertify.set("notifier", "position", "top-right");
@@ -160,7 +162,7 @@ async function onSubmit() {
   loading.value = true;
 
   try {
-    const response = await axios.post("http://localhost:5246/api/Auth/login", {
+    const response = await axios.post(`${API_BASE_URL}/api/Auth/login`, {
       username: username.value,
       password: password.value,
     });

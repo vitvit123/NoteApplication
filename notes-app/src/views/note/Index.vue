@@ -252,6 +252,7 @@ import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import alertify from "alertifyjs";
 import SortIcon from "./SortIcon.vue";
+import { API_BASE_URL } from "../../api";
 
 // Detail modal state
 const detailVisible = ref(false);
@@ -309,7 +310,7 @@ async function loadNotes() {
       return;
     }
 
-    const response = await axios.get("http://localhost:5246/api/notes", {
+    const response = await axios.get(`${API_BASE_URL}/api/notes`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "x-user-id": userId
@@ -409,7 +410,7 @@ async function submitNote() {
     if (isEditMode.value) {
       // Update note
       await axios.put(
-        `http://localhost:5246/api/notes/${modalNote.value.id}`,
+        `${API_BASE_URL}/api/notes/${modalNote.value.id}`,
         modalNote.value,
         { headers: {
           Authorization: `Bearer ${token}`,
@@ -419,7 +420,7 @@ async function submitNote() {
       alertify.success("Note updated successfully.");
     } else {
       await axios.post(
-        "http://localhost:5246/api/notes",
+        `${API_BASE_URL}/api/notes`,
         modalNote.value,
         { headers: {
           Authorization: `Bearer ${token}`,
@@ -431,7 +432,6 @@ async function submitNote() {
     await loadNotes();
     closeModal();
   } catch (error) { 
-    console.error("Add note error:", error.response || error);
     alertify.error("Failed to save note.");
   }
 }
@@ -451,7 +451,7 @@ async function deleteNote(id: number) {
     "Are you sure you want to delete this note?",
     async function () {
       try {
-        await axios.delete(`http://localhost:5246/api/notes/${id}`, {
+        await axios.delete(`${API_BASE_URL}/api/notes/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "x-user-id": userId

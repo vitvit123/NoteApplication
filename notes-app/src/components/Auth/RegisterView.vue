@@ -176,6 +176,7 @@ import axios from 'axios';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.min.css';
 import router from '../../router';
+import { API_BASE_URL } from '../../api';
 
 alertify.set('notifier', 'position', 'top-right');
 
@@ -226,7 +227,7 @@ async function onSubmit() {
   loading.value = true;
 
   try {
-    const response = await axios.post('http://localhost:5246/api/Auth/register', {
+    const response = await axios.post(`${API_BASE_URL}/api/Auth/register`, {
       username: username.value,
       password: password.value
     });
